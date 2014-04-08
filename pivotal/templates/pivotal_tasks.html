@@ -8,6 +8,7 @@
 
 <h3>{{ story.name }}</h3>
 
+<b>Tasks</b>
 <ul>
     {% for task in tasks %}
         <li class="{% if task.complete %}complete{% endif %}">{{ task.description }}</li>
