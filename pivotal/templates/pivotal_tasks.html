@@ -1,0 +1,15 @@
+<style>
+    li.complete {
+        text-decoration: line-through;
+    }
+</style>
+
+<a href="../../">back</a>
+
+<h3>{{ story.name }}</h3>
+
+<ul>
+    {% for task in tasks %}
+        <li class="{% if task.complete %}complete{% endif %}">{{ task.description }}</li>
+    {% endfor %}
+</ul>
