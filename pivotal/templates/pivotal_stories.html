@@ -1,1 +1,14 @@
-test
+Stories:
+<ul>
+    {% for story in stories %}
+        <li>
+            <span class="name">{{ story.name }}</span>
+            <span class="status">{{ story.current_state }}</span>
+            <span class="links">
+                <a href="{{ story.id }}/tasks">
+                    tasks
+                </a>
+            </span>
+        </li>
+    {% endfor %}
+</ul>

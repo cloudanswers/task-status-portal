@@ -86,3 +86,5 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 SESSION_ENGINE = "django.contrib.sessions.backends.signed_cookies"
+
+PIVOTAL_API_TOKEN = os.getenv('PIVOTAL_API_TOKEN')
