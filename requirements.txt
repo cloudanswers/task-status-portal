@@ -1,0 +1,4 @@
+Django==1.6.2
+django-ssl-redirect==1.0
+gunicorn==18.0
+wsgiref==0.1.2
