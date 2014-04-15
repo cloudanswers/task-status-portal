@@ -11,16 +11,32 @@ Stories:
     {% endif %}
 </div>
 
+<style>
+    span.status {
+        padding-left: 10px;
+        font-style: italic;
+    }
+</style>
+
 <ul>
     {% for story in stories %}
         <li class="{{story.current_state}}">
-            <span class="name">{{ story.name }}</span>
-            <span class="status">{{ story.current_state }}</span>
-            <span class="links">
-                <a href="{{ story.id }}/tasks">
-                    tasks
-                </a>
+            <span class="name">
+                <a href="{{ story.id }}/tasks">{{ story.name }}</a>
             </span>
+            <span class="status">{{ story.current_state }}</span>
         </li>
     {% endfor %}
 </ul>
+
+<div>
+    task statuses:
+    <ul>
+        <li>unscheduled: captured in system but not scheduled</li>
+        <li>unstarted: scheduled but not yet started</li>
+        <li>started: some progress has been made</li>
+        <li>finished: developer complete</li>
+        <li>delivered: code or logic deployed</li>
+        <li>accepted: verfieid completed by end user</li>
+    </ul>
+</div>
