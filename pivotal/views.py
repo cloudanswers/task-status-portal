@@ -56,6 +56,7 @@ def stories(request, project_id, tag_filter, hash_key):
     _verify_hash(project_id, tag_filter, hash_key)
     context = {
         'stories': _get_stories(project_id, tag_filter),
+        'show_completed': request.GET.get('show_completed'),
     }
     return render(request, 'pivotal_stories.html', context)
 

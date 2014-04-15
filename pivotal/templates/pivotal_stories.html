@@ -1,7 +1,19 @@
 Stories:
+
+<div>
+    {% if show_completed %}
+            <a href="./">hide completed</a>
+    {% else %}
+        <a href="./?show_completed=True">show completed</a>
+        <style>
+            li.accepted { display: none; }
+        </style>
+    {% endif %}
+</div>
+
 <ul>
     {% for story in stories %}
-        <li>
+        <li class="{{story.current_state}}">
             <span class="name">{{ story.name }}</span>
             <span class="status">{{ story.current_state }}</span>
             <span class="links">
