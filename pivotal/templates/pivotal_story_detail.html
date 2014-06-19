@@ -13,6 +13,8 @@
         {{ story.story_type|capfirst}}: {{ story.name }}
     </h3>
 
+    <pre>{{ story.description }}</pre>
+
     {% if tasks %}
         <h4>Internal Comments</h4>
         <ul>
