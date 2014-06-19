@@ -1,3 +1,7 @@
+{% extends "base.html" %}
+
+{% block content %}
+
 <style>
     li.complete {
         text-decoration: line-through;
@@ -14,3 +18,5 @@
         <li class="{% if task.complete %}complete{% endif %}">{{ task.description }}</li>
     {% endfor %}
 </ul>
+
+{% endblock %}
