@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<style>
+    li.complete {
+        text-decoration: line-through;
+    }
+</style>
+
+<a href="../../">back</a>
+    <h3>
+        {{ story.story_type|capfirst}}: {{ story.name }}
+    </h3>
+
+    {% if tasks %}
+        <h4>Internal Comments</h4>
+        <ul>
+            {% for task in tasks %}
+                <li class="{% if task.complete %}complete{% endif %}">{{ task.description }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <h4>Internal Comments</h4>
+    <ul class="list-group">
+        {% for comment in comments %}
+            <li class="list-group-item"><b>{{ comment.person_id }} at {{ comment.created_at }}:</b><br/>{{ comment.text }}</li>
+        {% endfor %}
+    </ul>
+    <!-- todo: accept customer comments -->
+    <!-- todo: show logged hours -->
+
+{% endblock %}

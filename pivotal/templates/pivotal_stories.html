@@ -26,7 +26,7 @@ Stories:
     {% for story in stories %}
         <li class="{{story.current_state}}">
             <span class="name">
-                <a href="{{ story.id }}/tasks">{{ story.name }}</a>
+                <a href="{{ story.id }}/">{{ story.name }}</a>
             </span>
             <span class="status">{{ story.current_state }}</span>
         </li>

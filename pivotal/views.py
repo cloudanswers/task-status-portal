@@ -52,6 +52,13 @@ def _get_tasks(project_id, story_id):
     return _get_json(url)
 
 
+def _get_comments(project_id, story_id):
+    url = "https://www.pivotaltracker.com" \
+          "/services/v5/projects/%s/stories/%s/comments" \
+          % (project_id, story_id)
+    return _get_json(url)
+
+
 def stories(request, project_id, tag_filter, hash_key):
     _verify_hash(project_id, tag_filter, hash_key)
     context = {
@@ -59,6 +66,16 @@ def stories(request, project_id, tag_filter, hash_key):
         'show_completed': request.GET.get('show_completed'),
     }
     return render(request, 'pivotal_stories.html', context)
+
+
+def story_details(request, project_id, tag_filter, hash_key, story_id):
+    _verify_hash(project_id, tag_filter, hash_key)
+    context = {
+        'story': _get_story(project_id, story_id),
+        'comments': _get_comments(project_id, story_id),
+        'tasks': _get_tasks(project_id, story_id),
+    }
+    return render(request, 'pivotal_story_detail.html', context)
 
 
 def tasks(request, project_id, tag_filter, hash_key, story_id):
