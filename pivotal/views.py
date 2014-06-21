@@ -1,9 +1,12 @@
+import json
 from django.shortcuts import render
-from django.http import Http404
+from django.http import Http404, HttpResponse
 import hashlib
 import requests
 import urllib
-from django_project.settings import SECRET_KEY, PIVOTAL_API_TOKEN
+from django_project.settings import SECRET_KEY, PIVOTAL_API_TOKEN, \
+    TOGGL_WORKSPACE_ID, TOGGL_API_TOKEN
+import toggl
 
 
 def _verify_hash(project_id, label, hash_key):
@@ -85,3 +88,16 @@ def tasks(request, project_id, tag_filter, hash_key, story_id):
         'tasks': _get_tasks(project_id, story_id),
     }
     return render(request, 'pivotal_tasks.html', context)
+
+
+def tasks(request, project_id, tag_filter, hash_key, story_id):
+    _verify_hash(project_id, tag_filter, hash_key)
+    found_project = None
+    for project in toggl.get_projects(TOGGL_WORKSPACE_ID):
+        if project.get('name').endswith('#%s' % story_id):
+            found_project = project
+            break
+    if not found_project:
+        return [{'none found'}]
+    data = toggl.get_project_hours(TOGGL_WORKSPACE_ID, found_project.get('id'))
+    return HttpResponse(json.dumps(data), mimetype='application/json')

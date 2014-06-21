@@ -88,3 +88,5 @@ STATIC_URL = '/static/'
 SESSION_ENGINE = "django.contrib.sessions.backends.signed_cookies"
 
 PIVOTAL_API_TOKEN = os.getenv('PIVOTAL_API_TOKEN')
+TOGGL_WORKSPACE_ID = os.getenv('TOGGL_WORKSPACE_ID')
+TOGGL_API_TOKEN = os.getenv('TOGGL_API_TOKEN')

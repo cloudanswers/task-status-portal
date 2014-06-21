@@ -36,4 +36,30 @@
     <!-- todo: accept customer comments -->
     <!-- todo: show logged hours -->
 
+
+    <h4>Hours Logged</h4>
+    <ul class="list-group" id="hours">
+        <li class="list-group-item loading">Loading...</li>
+    </ul>
+
+    <script type="text/javascript">
+        function formatHours(dur) {
+            var hours = dur / 1000 / 60 / 60;
+            return Math.round(hours * 100)/100;
+        }
+        $(document).ready(function() {
+            $.getJSON("hours.json", function( data ) {
+                $("#hours .loading").hide();
+                $.each(data, function (_, row) {
+                    $("#hours").append(
+                        '<li class="list-group-item">' +
+                        [row.start.slice(0, 10),
+                         row.user,
+                         " <b>" + formatHours(row.dur) + "h</b>",
+                         "</li>"].join(" "));
+                });
+            });
+        });
+    </script>
+
 {% endblock %}
